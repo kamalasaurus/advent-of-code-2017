@@ -3,7 +3,7 @@ function inverseCaptcha(captcha) {
   console.assert((typeof captcha === 'string'), 'captcha is not a string but rather a', (typeof a));
 
   let endMatch = /(\d)\1{0,}$/; //  match the final digits, group if same
-  let groupMatch = /(\d)\1{1,}/g; // match repeating groups throughout
+  let groupMatch = /(\d)\1{1}/g; // match repeating groups of 2 throughout
 
   return captcha
     .match(endMatch)
@@ -13,7 +13,9 @@ function inverseCaptcha(captcha) {
       captcha.replace(endMatch, '')
     ) // shift final digits to beginning for clean circular barrier
     .match(groupMatch) // collect groups
-    .reduce(((sum, arg) => sum + +arg.substring(0,1)), 0); // default argument in case no matches
+    .reduce((sum, arg) => {
+      return sum + (+arg.substring(0,1) * (arg.length - 1));
+    }, 0); // default argument in case no matches
 
 }
 
