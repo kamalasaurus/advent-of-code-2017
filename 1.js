@@ -1,6 +1,6 @@
-function inverse(captcha) {
+function inverseCaptcha(captcha) {
 
-  console.assert((typeof captcha === 'string'), 'captcha is not a string but rather a', (typeof a));
+  console.assert((typeof captcha === 'string'), 'captcha is not a string but rather a', (typeof captcha));
 
   return captcha
     .split('')
